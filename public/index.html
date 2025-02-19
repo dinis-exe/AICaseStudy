@@ -6,17 +6,19 @@
     <title>Medical Exam Analysis AI</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
     <nav>
         <div class="logo">ExaminAI</div>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="/profile" id="profile-link" style="display: none;">Profile</a></li>
-            <li><a href="/login" id="login-link">Login</a></li>
-            <li><a href="/logout" id="logout-link">Logout</a></li>
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="/profile" id="profile-link" style="display: none;"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="/login" id="login-link"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+            <li><a href="/logout" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            <li><button id="dark-mode-toggle"><i class="fas fa-moon"></i></button></li>
         </ul>
     </nav>
     <div class="container">
@@ -26,17 +28,39 @@
                 <i class="fas fa-cloud-upload-alt"></i> Choose Image
             </label>
             <input type="file" id="image-input" accept="image/*" required>
-            <button type="submit" class="btn">Upload Image</button>
+            <button type="submit" class="btn"><i class="fas fa-upload"></i> Upload Image</button>
         </form>
         <div id="image-preview-container">
             <h2 id="image-preview-text" style="display: none">Image Preview:</h2>
-            <img id="image-preview" src="#" alt="Image Preview" style="display: none; max-width: 100%; height: auto;"/>
+            <img id="image-preview" src="#" alt="Image Preview" />
         </div>
         <div id="result">
             <h2>Diagnosis:</h2>
             <p id="diagnosis"></p>
             <h2>Probability:</h2>
             <p id="probability"></p>
+        </div>
+    </div> <!-- End of container -->
+    <!-- New AI Efficiency Dashboard section -->
+    <div id="dashboard">
+        <h2>AI Efficiency Dashboard</h2>
+        <div class="dashboard-cards">
+            <div class="card">
+                <h3>Efficiency</h3>
+                <p>98.7%</p>
+            </div>
+            <div class="card">
+                <h3>Precision</h3>
+                <p>95.3%</p>
+            </div>
+            <div class="card">
+                <h3>Inference Speed</h3>
+                <p>150ms</p>
+            </div>
+            <div class="card">
+                <h3>Uptime</h3>
+                <p>99.9%</p>
+            </div>
         </div>
     </div>
     <footer>

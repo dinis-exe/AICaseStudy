@@ -19,56 +19,63 @@ document.addEventListener('DOMContentLoaded', function() {
         .catch(error => {
             console.error('Error:', error);
         });
-});
 
-document.getElementById('upload-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    const imageInput = document.getElementById('image-input');
-    if (imageInput.files && imageInput.files[0]) {
-        const formData = new FormData();
-        formData.append('image', imageInput.files[0]);
+    // Enhanced Dark mode toggle: Change icon based on mode
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+        // Toggle button icon: if dark mode active then show sun, else moon
+        const icon = darkModeToggle.querySelector('i');
+        if(document.body.classList.contains('dark-mode')) {
+            icon.className = 'fas fa-sun';
+        } else {
+            icon.className = 'fas fa-moon';
+        }
+    });
 
-        // Simulate an API call to get the diagnosis and probability
-        fetch('/api/analyze', {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('diagnosis').textContent = data.diagnosis;
-            document.getElementById('probability').textContent = data.probability;
-            document.getElementById('result').style.display = 'block';
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    }
-});
+    document.getElementById('upload-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const imageInput = document.getElementById('image-input');
+        if (imageInput.files && imageInput.files[0]) {
+            const formData = new FormData();
+            formData.append('image', imageInput.files[0]);
 
-document.getElementById('image-input').addEventListener('change', function(event) {
-    const file = event.target.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            const preview = document.getElementById('image-preview');
-            preview.src = e.target.result;
-            preview.style.display = 'block';
-        };
-        reader.readAsDataURL(file);
-    }
-});
+            // Simulate an API call to get the diagnosis and probability
+            fetch('/api/analyze', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('diagnosis').textContent = data.diagnosis;
+                document.getElementById('probability').textContent = data.probability;
+                document.getElementById('result').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+    });
 
-document.getElementById('image-input').addEventListener('change', function(event) {
-    const resultContainer = document.getElementById('result');
-    const previewText = document.getElementById('image-preview-text'); 
-    const previewImage = document.getElementById('image-preview');
-    
-    if (event.target.files.length > 0) {
-        previewText.style.display = 'block'; // Show the preview text
-        resultContainer.style.display = 'block'; // Show the result container
-    } else {
-        previewText.style.display = 'none'; // Hide the preview text
-        resultContainer.style.display = 'none'; // Hide the result container
-        previewImage.style.display = 'none'; // Hide the preview image
-    }
+    // Merge duplicate change listeners for the image input
+    document.getElementById('image-input').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const preview = document.getElementById('image-preview');
+        const previewText = document.getElementById('image-preview-text');
+        const resultContainer = document.getElementById('result');
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+            previewText.style.display = 'block';
+            resultContainer.style.display = 'block';
+        } else {
+            previewText.style.display = 'none';
+            resultContainer.style.display = 'none';
+            preview.style.display = 'none';
+        }
+    });
 });

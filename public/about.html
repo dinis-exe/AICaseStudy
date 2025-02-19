@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <title>About Us - ExaminAI</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
@@ -13,19 +14,20 @@
         <div class="logo">ExaminAI</div>
         <ul>
             <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="./about.Html"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="./contact.html"><i class="fas fa-envelope"></i> Contact</a></li>
             <li><a href="/profile" id="profile-link" style="display: none;"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="/login" id="login-link"><i class="fas fa-sign-in-alt"></i> Login</a></li>
             <li><a href="/logout" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             <li><button id="dark-mode-toggle"><i class="fas fa-moon"></i></button></li>
         </ul>
     </nav>
-    <div class="auth-container">
-        <h1>User Profile</h1>
-        <div id="profile-info">
-            <img id="profile-picture" src="#" alt="Profile Picture" style="display: none; margin: 0 auto;"/>
-            <p id="user-name"></p>
-            <p id="user-email"></p>
-        </div>
+    <div class="container">
+        <h1>About Us</h1>
+        <p>Learn more about our mission and team.</p>
     </div>
-    <script src="profile.js"></script>
+    <footer>
+        <p>&copy; 2025 ExaminAI. All rights reserved.</p>
+    </footer>
 </body>
 </html>
