@@ -1,0 +1,174 @@
+/* Define CSS variables for the color palette */
+:root {
+    --primary-color: #5391d2;
+    --secondary-color: #28a745;
+    --background-color: #f4f4f9;
+    --text-color: #333;
+    --white-color: #fff;
+    --hover-primary-color: #0056b3;
+    --hover-secondary-color: #218838;
+}
+
+/* Apply the CSS variables */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding-top: 60px; /* Adjust based on the height of the navbar */
+}
+
+nav {
+    background-color: var(--primary-color); /* Use primary color */
+    color: var(--white-color); /* Use white color */
+    padding: 1rem 2rem; /* Add padding to the left and right */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure it stays on top */
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+}
+
+nav .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    color: var(--white-color); /* Use white color */
+    text-decoration: none;
+    font-size: 1rem;
+}
+
+.container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: var(--white-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+h1 {
+    color: var(--primary-color);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 20px;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border-radius: 4px;
+}
+
+.custom-file-upload:hover {
+    background-color: var(--hover-primary-color);
+}
+
+#image-input {
+    display: none;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    background-color: var(--secondary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: var(--hover-secondary-color);
+}
+
+#result {
+    margin-top: 2rem;
+    text-align: center;
+    display: none;
+    max-width: 300px; /* Make the preview smaller */
+    margin: 2rem auto; /* Center the preview */
+}
+
+#result h2 {
+    margin: 10px 0;
+    display: none; /* Hide the preview text initially */
+}
+
+#image-preview {
+    display: none;
+    max-width: 20%; /* Resize the image to be 30% of the page width */
+    height: auto;
+}
+
+footer {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.auth-container {
+    max-width: 400px;
+    margin: 5rem auto;
+    padding: 2rem;
+    background-color: var(--white-color);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.auth-container h1 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
