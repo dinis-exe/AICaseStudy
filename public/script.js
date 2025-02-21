@@ -3,9 +3,9 @@ document.addEventListener('DOMContentLoaded', function() {
     fetch('/auth-status')
         .then(response => response.json())
         .then(data => {
-            const loginLink = document.querySelector('nav ul li a[href="/login"]');
-            const logoutLink = document.querySelector('nav ul li a[href="/logout"]');
-            const profileLink = document.querySelector('nav ul li a[href="/profile"]');
+            const loginLink = document.getElementById('login-link');
+            const logoutLink = document.getElementById('logout-link');
+            const profileLink = document.getElementById('profile-link');
             if (data.isAuthenticated) {
                 loginLink.style.display = 'none';
                 logoutLink.style.display = 'block';

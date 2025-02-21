@@ -5,6 +5,9 @@ const { auth } = require('express-openid-connect');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middleware for parsing URL-encoded bodies (for form submissions)
+app.use(express.urlencoded({ extended: true }));
+
 // Auth0 configuration
 const config = {
   authRequired: false,
@@ -69,6 +72,25 @@ app.get('/about', (req, res) => {
 
 app.get('/contact', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'contact.html'));
+});
+
+// New route: Serve hospital login page
+app.get('/hospital-login', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'hospital-login.html'));
+});
+
+// New route: Handle hospital login form submission
+app.post('/hospital-verify', (req, res) => {
+    const { hospitalName, accessCode } = req.body;
+    // For demonstration, assume the valid hospital credentials:
+    if (hospitalName === 'MyHospital' && accessCode === '1234') {
+        // Optionally: set a session property or token
+        // Redirect to the home page after successful login
+        res.redirect('/');
+    } else {
+        // Invalid credentials: redirect back to the hospital login page or show error
+        res.redirect('/hospital-login');
+    }
 });
 
 app.listen(PORT, () => {

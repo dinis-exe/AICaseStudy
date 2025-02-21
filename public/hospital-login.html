@@ -1,0 +1,39 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ...existing head meta tags... -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Login - ExaminAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- You can include additional styles if needed -->
+</head>
+<body>
+    <nav>
+        <!-- ...existing nav... -->
+        <div class="logo">ExaminAI</div>
+        <ul>
+            <!-- ...existing links... -->
+        </ul>
+    </nav>
+    <div class="auth-container">
+        <h1>Hospital Login</h1>
+        <form action="/hospital-verify" method="POST">
+            <div class="form-group">
+                <label for="hospitalName">Hospital Name</label>
+                <input type="text" id="hospitalName" name="hospitalName" required>
+            </div>
+            <div class="form-group">
+                <label for="accessCode">Access Code</label>
+                <input type="password" id="accessCode" name="accessCode" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+    </div>
+    <footer>
+        <p>&copy; 2025 ExaminAI. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
