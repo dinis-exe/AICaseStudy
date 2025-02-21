@@ -11,16 +11,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 logoutLink.style.display = 'block';
                 profileLink.style.display = 'block';
 
-                // Fetch and display user profile information
-                fetch('/api/profile')
-                    .then(response => response.json())
-                    .then(profileData => {
-                        document.getElementById('profile-name').textContent = profileData.name;
-                        document.getElementById('profile-email').textContent = profileData.email;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching profile:', error);
-                    });
+                // Update profile info only if an element exists
+                const nameEl = document.getElementById('profile-name') || document.getElementById('user-name');
+                if (nameEl) {
+                    fetch('/api/profile')
+                        .then(response => response.json())
+                        .then(profileData => {
+                            if(document.getElementById('profile-name')) {
+                                document.getElementById('profile-name').textContent = profileData.name;
+                                document.getElementById('profile-email').textContent = profileData.email;
+                            } else if(document.getElementById('user-name')) {
+                                document.getElementById('user-name').textContent = profileData.name;
+                                document.getElementById('user-email').textContent = profileData.email;
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching profile:', error);
+                        });
+                }
             } else {
                 loginLink.style.display = 'block';
                 logoutLink.style.display = 'none';

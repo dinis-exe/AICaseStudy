@@ -65,7 +65,11 @@ body.dark-mode nav ul li a {
     color: var(--dark-text-color);
 }
 
-body.dark-mode .custom-file-upload,
+body.dark-mode .custom-file-upload {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
 body.dark-mode .btn {
     background-color: var(--secondary-color);
     color: var(--white-color);
