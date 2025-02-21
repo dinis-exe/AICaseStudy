@@ -82,13 +82,10 @@ app.get('/hospital-login', (req, res) => {
 // New route: Handle hospital login form submission
 app.post('/hospital-verify', (req, res) => {
     const { hospitalName, accessCode } = req.body;
-    // For demonstration, assume the valid hospital credentials:
-    if (hospitalName === 'MyHospital' && accessCode === '1234') {
-        // Optionally: set a session property or token
-        // Redirect to the home page after successful login
+    // Accept only these credentials: hospitalName: 's joao', accessCode: '123'
+    if (hospitalName === 's joao' && accessCode === '123') {
         res.redirect('/');
     } else {
-        // Invalid credentials: redirect back to the hospital login page or show error
         res.redirect('/hospital-login');
     }
 });
