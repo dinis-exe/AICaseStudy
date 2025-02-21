@@ -63,19 +63,20 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('upload-form').addEventListener('submit', function(event) {
         event.preventDefault();
         const imageInput = document.getElementById('image-input');
+    
         if (imageInput.files && imageInput.files[0]) {
             const formData = new FormData();
-            formData.append('image', imageInput.files[0]);
-
-            // Simulate an API call to get the diagnosis and probability
-            fetch('/api/analyze', {
+            formData.append('file', imageInput.files[0]);  // FastAPI expects "file" as the key
+    
+            // Send image to FastAPI pneumonia detection API
+            fetch('https://ai-challenge-api.onrender.com/predict/', {  
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('diagnosis').textContent = data.diagnosis;
-                document.getElementById('probability').textContent = data.probability;
+                document.getElementById('diagnosis').textContent = data.prediction;  // Update diagnosis
+                document.getElementById('probability').textContent = (data.confidence * 100).toFixed(2) + "%";  // Convert confidence to percentage
                 document.getElementById('result').style.display = 'block';
             })
             .catch(error => {
@@ -83,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     });
+    
 
     // Merge duplicate change listeners for the image input
     document.getElementById('image-input').addEventListener('change', function(event) {
