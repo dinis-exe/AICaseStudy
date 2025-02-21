@@ -10,6 +10,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 loginLink.style.display = 'none';
                 logoutLink.style.display = 'block';
                 profileLink.style.display = 'block';
+
+                // Fetch and display user profile information
+                fetch('/api/profile')
+                    .then(response => response.json())
+                    .then(profileData => {
+                        document.getElementById('profile-name').textContent = profileData.name;
+                        document.getElementById('profile-email').textContent = profileData.email;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching profile:', error);
+                    });
             } else {
                 loginLink.style.display = 'block';
                 logoutLink.style.display = 'none';

@@ -1,10 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- ...existing head meta tags... -->
     <title>Contact Us - ExaminAI</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- ...existing stylesheets... -->
 </head>
 <body>
@@ -12,7 +12,10 @@
         <div class="logo">ExaminAI</div>
         <ul>
             <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
-            <li><a href="/profile" id="profile-link" style="display: none;"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="/about"><i class="fas fa-info-circle"></i> About</a></li>
+            <li><a href="/contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            <li><a href="/profile" id="profile-link"><i class="fas fa-user"></i> Profile</a></li>
+            <li><a href="/login" id="login-link"><i class="fas fa-sign-in-alt"></i> Login</a></li>
             <li><a href="/logout" id="logout-link"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
             <li><button id="dark-mode-toggle"><i class="fas fa-moon"></i></button></li>
         </ul>
@@ -25,5 +28,6 @@
     <footer>
         <p>&copy; 2025 ExaminAI. All rights reserved.</p>
     </footer>
+    <script src="script.js"></script> <!-- Added to handle nav auth toggle -->
 </body>
 </html>

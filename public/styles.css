@@ -18,14 +18,34 @@
 body.dark-mode {
     background-color: var(--dark-background-color);
     color: var(--dark-text-color);
-    background-image: url('/images/dark-background.jpg');
+    background-image: url('/images/background-dark.jpg');
 }
 
-/* ...existing dark mode rules... */
+body:not(.dark-mode) {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    background-image: url('/images/background.jpg');
+}
+
 body.dark-mode .container,
-body.dark-mode .auth-container {
+body.dark-mode .auth-container,
+body.dark-mode #dashboard {
     background-color: var(--dark-container-color);
-    color: var(--dark-text-color);
+}
+
+body:not(.dark-mode) .container,
+body:not(.dark-mode) .auth-container,
+body:not(.dark-mode) #dashboard {
+    background-color: var(--white-color);
+    color: var(--text-color);
+}
+
+body.dark-mode #dashboard {
+    background: linear-gradient(135deg, var(--dark-container-color), var(--dark-background-color));
+}
+
+body:not(.dark-mode) #dashboard {
+    background: linear-gradient(135deg, var(--white-color), var(--background-color));
 }
 
 body.dark-mode nav,
@@ -34,19 +54,55 @@ body.dark-mode footer {
     color: var(--dark-text-color);
 }
 
+body:not(.dark-mode) nav,
+body:not(.dark-mode) footer {
+    background-color: var(--primary-color);
+    color: var(--white-color);
+}
+
+/* Rest of the dark mode styles remain the same */
 body.dark-mode nav ul li a {
     color: var(--dark-text-color);
 }
 
 body.dark-mode .custom-file-upload,
 body.dark-mode .btn {
-    background-color: var(--dark-container-color);
-    color: var(--dark-text-color);
+    background-color: var(--secondary-color);
+    color: var(--white-color);
 }
 
 body.dark-mode .custom-file-upload:hover,
 body.dark-mode .btn:hover {
-    background-color: var(--hover-primary-color);
+    background-color: var(--hover-secondary-color);
+}
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3 {
+    color: var(--dark-text-color) !important; 
+}
+
+body.dark-mode .dashboard-cards .card p {
+    color: var(--secondary-color);
+}
+
+body.dark-mode #result {
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .dashboard-cards .card {
+    background: var(--dark-container-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .form-group label {
+    color: var(--dark-text-color);
+}
+
+body.dark-mode .form-group input {
+    background-color: var (--dark-container-color);
+    color: var (--dark-text-color);
+    border-color: var(--dark-text-color);
 }
 
 /* Apply the CSS variables */
@@ -184,17 +240,25 @@ form {
     display: none; /* Hide the preview text initially */
 }
 
+/* Updated preview container styling for scrollable behavior */
+#image-preview-container {
+    margin-top: 1rem;
+    text-align: center;
+    max-height: 300px;
+    overflow: auto; /* enables scroll if content overflows */
+}
+
+/* Updated preview image styling */
 #image-preview {
     display: none;
     max-width: 100%; /* enlarged based on screenshot design */
     height: auto;
     border-radius: 4px;
-}
-
-/* Center and space the preview container */
-#image-preview-container {
-    margin-top: 1rem;
-    text-align: center;
+    display: block;
+    margin: 0 auto;
+    width: 100%;         /* added to scale image to container */
+    height: auto;
+    object-fit: contain;
 }
 
 footer {
@@ -246,7 +310,7 @@ footer {
     max-width: 900px;
     padding: 2rem;
     text-align: center;
-    background: linear-gradient(135deg, #e0f7fa, #80deea);
+    background: linear-gradient(135deg, var(--white-color), var(--background-color));
     border-radius: 12px;
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
@@ -266,7 +330,7 @@ footer {
 
 .dashboard-cards .card {
     flex: 1 1 200px;
-    background-color: var(--white-color);
+    background: linear-gradient(135deg, var(--background-color), var(--white-color));
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
