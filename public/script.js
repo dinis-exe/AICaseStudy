@@ -39,25 +39,18 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
         });
 
-    // Check dark mode preference on page load and apply preference
-    if (localStorage.getItem('dark-mode') === 'enabled') {
+    // Remove all old dark mode related code and replace with this:
+    const themeToggle = document.getElementById('theme-toggle');
+    
+    // Check for saved theme preference
+    if (localStorage.getItem('darkMode') === 'true') {
         document.body.classList.add('dark-mode');
-        const toggleIcon = document.getElementById('dark-mode-toggle').querySelector('i');
-        toggleIcon.className = 'fas fa-sun';
     }
 
-    // Enhanced Dark mode toggle: Change icon based on mode and persist state
-    const darkModeToggle = document.getElementById('dark-mode-toggle');
-    darkModeToggle.addEventListener('click', () => {
+    // Theme toggle handler
+    themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        const icon = darkModeToggle.querySelector('i');
-        if (document.body.classList.contains('dark-mode')) {
-            icon.className = 'fas fa-sun';
-            localStorage.setItem('dark-mode', 'enabled');
-        } else {
-            icon.className = 'fas fa-moon';
-            localStorage.setItem('dark-mode', 'disabled');
-        }
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
     });
 
     document.getElementById('upload-form').addEventListener('submit', function(event) {

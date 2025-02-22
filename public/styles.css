@@ -12,6 +12,10 @@
     --dark-background-color: #121212;
     --dark-text-color: #fff; /* Changed from #e0e0e0 to white */
     --dark-container-color: #1e1e1e;
+    --ease-3: cubic-bezier(0.25, 0, 0.3, 1);
+    --ease-out-5: cubic-bezier(0, 0, 0.3, 1);
+    --ease-elastic-3: cubic-bezier(0.5, 1.25, 0.75, 1.25);
+    --ease-elastic-4: cubic-bezier(0.5, 1.5, 0.75, 1.25);
 }
 
 /* Dark mode styles */
@@ -404,3 +408,110 @@ body.dark-mode footer {
 }
 
 /* ...existing code remains unchanged... */
+
+body.dark-mode nav {
+    background-color: transparent;
+    color: var(--dark-text-color);
+    border-bottom: none; /* Remove bottom border in dark mode */
+}
+
+body.dark-mode footer {
+    background-color: transparent;
+    color: var(--dark-text-color);
+    border-top: none; /* Remove top border in dark mode */
+}
+
+/* Theme toggle button styles */
+.theme-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    inline-size: 2.5rem;
+    block-size: 2.5rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    outline-offset: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: currentColor;
+    position: relative;
+    top: -1px; /* Fine-tune vertical alignment */
+}
+
+/* Align theme toggle with nav items */
+nav ul li .theme-toggle {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: 2px; /* Adjust to match text alignment */
+}
+
+/* Adjust the size and position of the toggle icon */
+.theme-toggle > svg {
+    inline-size: 18px; /* Slightly smaller to match text size */
+    block-size: 18px;
+}
+
+/* Sun and moon animations */
+.sun-and-moon > :is(.moon, .sun, .sun-beams) {
+    transform-origin: center center;
+}
+
+.sun-and-moon > :is(.moon, .sun) {
+    fill: currentColor;
+}
+
+.theme-toggle:is(:hover, :focus-visible) > .sun-and-moon > .sun {
+    transform: scale(1.1);
+}
+
+.sun-and-moon > .sun-beams {
+    stroke-width: 2px;
+}
+
+.theme-toggle:is(:hover, :focus-visible) .sun-beams {
+    transform: scale(1.1);
+}
+
+.dark-mode .sun-and-moon > .sun {
+    transform: scale(1.75);
+}
+
+.dark-mode .sun-and-moon > .sun-beams {
+    opacity: 0;
+}
+
+.dark-mode .sun-and-moon > .moon > circle {
+    transform: translateX(-7px);
+}
+
+@supports (animation-timeline: view-timeline) {
+    @keyframes rotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
+
+    .sun-and-moon {
+        animation: rotate linear;
+        animation-timeline: view-timeline;
+    }
+}
+
+/* Smooth transitions */
+.sun-and-moon > .sun {
+    transition: transform 0.5s var(--ease-elastic-3);
+}
+
+.sun-and-moon > .sun-beams {
+    transition: transform 0.5s var(--ease-elastic-4), opacity 0.5s var(--ease-3);
+}
+
+.sun-and-moon .moon > circle {
+    transition: transform 0.25s var(--ease-out-5);
+}
+
+/* ...existing code... */
