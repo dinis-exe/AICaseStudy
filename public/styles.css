@@ -176,6 +176,18 @@ nav ul li a:hover {
     color: var(--hover-primary-color);
 }
 
+nav a,
+nav ul li a {
+    text-decoration: none; /* Remove underline */
+    color: inherit;       /* Inherit the color from nav rules */
+}
+
+/* Optionally remove focus outline if desired */
+nav a:focus, 
+nav ul li a:focus {
+    outline: none;
+}
+
 .container {
     max-width: 600px;
     margin: 2rem auto;
