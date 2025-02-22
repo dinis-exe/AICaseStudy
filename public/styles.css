@@ -150,6 +150,8 @@ nav {
     width: 100%;
     z-index: 1000; /* Ensure it stays on top */
     box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+    display: flex;
+    align-items: center; /* Vertically centers nav content */
 }
 
 nav .logo {
@@ -161,6 +163,8 @@ nav ul {
     list-style: none;
     display: flex;
     gap: 1rem;
+    display: flex;
+    align-items: center; /* Vertically centers nav items */
 }
 
 nav ul li {
