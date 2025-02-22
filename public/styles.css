@@ -2,15 +2,15 @@
 
 /* Define CSS variables for the color palette */
 :root {
-    --primary-color: #2c3e50; /* darker, minimalist tone */
-    --secondary-color: #e74c3c;
-    --background-color: #ecf0f1;
-    --text-color: #2c3e50;
+    --primary-color: #2c3e50; /* keep or update to a refined dark tone */
+    --secondary-color: #e74c3c; /* accent remains */
+    --background-color: #f7f9fc; /* lighter, cleaner background */
+    --text-color: #000;
     --white-color: #fff;
-    --hover-primary-color: #34495e;
-    --hover-secondary-color: #c0392b;
+    --hover-primary-color: #3a506b;
+    --hover-secondary-color: #d9433c;
     --dark-background-color: #121212;
-    --dark-text-color: #e0e0e0;
+    --dark-text-color: #fff; /* Changed from #e0e0e0 to white */
     --dark-container-color: #1e1e1e;
 }
 
@@ -50,13 +50,13 @@ body:not(.dark-mode) #dashboard {
 
 body.dark-mode nav,
 body.dark-mode footer {
-    background-color: var(--dark-container-color);
+    background-color: transparent; /* was var(--dark-container-color) */
     color: var(--dark-text-color);
 }
 
 body:not(.dark-mode) nav,
 body:not(.dark-mode) footer {
-    background-color: var(--primary-color);
+    background-color: transparent; /* was var(--primary-color) */
     color: var(--white-color);
 }
 
@@ -134,9 +134,10 @@ body {
 }
 
 nav {
-    background-color: var(--primary-color); /* Use primary color */
-    color: var(--white-color); /* Use white color */
-    padding: 0.75rem 1.5rem;
+    background-color: transparent;
+    color: var(--white-color);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -166,28 +167,37 @@ nav ul li a {
     color: var(--white-color); /* Use white color */
     text-decoration: none;
     font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: var(--hover-primary-color);
 }
 
 .container {
-    max-width: 600px; /* Reduced width for a compact look */
+    max-width: 600px;
     margin: 2rem auto;
     padding: 2rem;
     background-color: var(--white-color);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .container:hover {
-    transform: scale(1.02);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
 h1 {
     color: var(--primary-color);
     text-align: center;
     margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
 form {
@@ -207,10 +217,15 @@ form {
     border-radius: 8px;
     border: none;
     letter-spacing: 0.5px;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .custom-file-upload:hover {
     background-color: var(--hover-primary-color);
+    transform: translateY(-2px);
 }
 
 #image-input {
@@ -225,10 +240,15 @@ form {
     border-radius: 8px;
     cursor: pointer;
     letter-spacing: 0.5px;
+    font-size: 1rem;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
 .btn:hover {
     background-color: var(--hover-secondary-color);
+    transform: translateY(-2px);
 }
 
 #result {
@@ -266,13 +286,15 @@ form {
 }
 
 footer {
-    background-color: var(--primary-color);
+    background-color: transparent;
     color: var(--white-color);
     text-align: center;
     padding: 1rem;
     position: fixed;
     width: 100%;
     bottom: 0;
+    border-top: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.9rem;
 }
 
 .auth-container {
@@ -286,7 +308,7 @@ footer {
 }
 
 .auth-container h1 {
-    color: var(--primary-color);
+    color: var (--primary-color);
     margin-bottom: 1.5rem;
 }
 
@@ -302,9 +324,16 @@ footer {
 
 .form-group input {
     width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--secondary-color);
 }
 
 /* ...existing code... */
@@ -358,4 +387,20 @@ footer {
     color: var(--primary-color);
 }
 
-/* ...existing code... */
+/* Override text colors for nav and footer with black letters */
+nav, 
+nav ul li a,
+footer {
+    color: #000 !important;
+}
+
+/* ...existing code remains unchanged... */
+
+/* Override text colors for nav and footer in dark mode */
+body.dark-mode nav, 
+body.dark-mode nav ul li a, 
+body.dark-mode footer {
+    color: #fff !important;
+}
+
+/* ...existing code remains unchanged... */
