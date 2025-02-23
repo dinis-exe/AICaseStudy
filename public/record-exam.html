@@ -1,0 +1,38 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrar Exame - ExaminAI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <div class="logo">ExaminAI</div>
+    <ul>
+      <li><a href="/hospital-dashboard">Dashboard</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <h1>Registrar Exame de Raio-X</h1>
+    <form action="/record-exam" method="POST">
+      <div class="form-group">
+        <label for="patient_id_exam">ID do Paciente</label>
+        <input type="number" id="patient_id_exam" name="patient_id" required>
+      </div>
+      <div class="form-group">
+        <label for="result">Resultado do Exame</label>
+        <input type="text" id="result" name="result" required>
+      </div>
+      <div class="form-group">
+        <label for="date">Data do Exame</label>
+        <input type="date" id="date" name="date" required>
+      </div>
+      <button type="submit" class="btn">Registrar Exame</button>
+    </form>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico de Exames - ExaminAI</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav>
+    <!-- ...existing nav code... -->
+    <div class="logo">ExaminAI</div>
+    <ul>
+      <li><a href="/hospital-dashboard">Dashboard</a></li>
+      <li><a href="/logout">Logout</a></li>
+    </ul>
+  </nav>
+  <div class="container">
+    <h1>Histórico de Exames de Paciente</h1>
+    <form id="history-form">
+      <div class="form-group">
+        <label for="patient_id_history">ID do Paciente</label>
+        <input type="number" id="patient_id_history" name="patient_id" required>
+      </div>
+      <button type="submit" class="btn">Ver Histórico</button>
+    </form>
+    <div id="history-result" style="margin-top: 2rem;"></div>
+  </div>
+  <script>
+    document.getElementById('history-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const pid = document.getElementById('patient_id_history').value;
+      fetch('/patient-history?patient_id=' + pid)
+        .then(response => response.json())
+        .then(data => {
+          let html = '<h2>Exames:</h2>';
+          if(data.history.length === 0){
+            html += '<p>Nenhum exame encontrado.</p>';
+          } else {
+            html += '<ul>';
+            data.history.forEach(item => {
+              html += `<li>ID: ${item.history_id}, Resultado: ${item.result}, Data: ${item.date}, Hospital: ${item.hospital_name}</li>`;
+            });
+            html += '</ul>';
+          }
+          document.getElementById('history-result').innerHTML = html;
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('history-result').innerHTML = '<p>Erro ao carregar histórico.</p>';
+        });
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
