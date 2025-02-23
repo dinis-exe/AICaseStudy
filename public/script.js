@@ -59,27 +59,35 @@ document.addEventListener('DOMContentLoaded', function() {
     
         if (imageInput.files && imageInput.files[0]) {
             const formData = new FormData();
-            formData.append('file', imageInput.files[0]);  // FastAPI expects "file" as the key
+            formData.append('file', imageInput.files[0]);
     
-            // Send image to FastAPI pneumonia detection API
-            fetch('https://ai-challenge-api.onrender.com/predict/', {  
+            fetch('https://ai-challenge-api.onrender.com/predict/', {
                 method: 'POST',
                 body: formData
             })
             .then(response => response.json())
             .then(data => {
-                document.getElementById('diagnosis').textContent = data.prediction;  // Update diagnosis
+                // Update diagnosis results in the modal
+                document.getElementById('diagnosis').textContent = data.prediction;
                 const confidence = data.confidence * 100;
                 const displayConfidence = confidence < 50 ? (100 - confidence) : confidence;
                 document.getElementById('probability').textContent = "Confidence: " + displayConfidence.toFixed(2) + "%";
-                document.getElementById('result').style.display = 'block';
+                // Show diagnosis modal
+                const diagnosisModal = document.getElementById('diagnosis-modal');
+                diagnosisModal.style.display = 'flex';
             })
             .catch(error => {
                 console.error('Error:', error);
             });
         }
     });
-    
+
+    // Close button listener for the diagnosis modal
+    document.addEventListener('click', function(event) {
+        if (event.target.classList.contains('close-button')) {
+            document.getElementById('diagnosis-modal').style.display = 'none';
+        }
+    });
 
     // Merge duplicate change listeners for the image input
     document.getElementById('image-input').addEventListener('change', function(event) {

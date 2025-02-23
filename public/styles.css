@@ -173,7 +173,19 @@ body {
     padding: 2rem;
     border-radius: 8px;
     text-align: center;
+    position: relative; /* Ensure positioning context for the close button */
 }
+
+/* New style for the login selection modal close button */
+#login-selection-modal .modal-content .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: var(--white-color);
+    font-size: 24px; /* Optionally adjust the size */
+}
+
 #login-selection-modal button {
     padding: 0.75rem 1.5rem;
     background-color: transparent;
@@ -185,6 +197,11 @@ body {
     font-size: 1rem;
     font-weight: 500;
     transition: transform 0.2s;
+}
+
+/* Add spacing between login buttons in the login selection modal */
+#login-selection-modal .modal-content button + button {
+    margin-left: 1rem;
 }
 
 nav {
@@ -623,4 +640,30 @@ body:not(.dark-mode) footer {
   border-radius: 4px;
 }
 
-/* ...existing code... */
+/* New Diagnosis Modal styles */
+#diagnosis-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.849);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+#diagnosis-modal .modal-content {
+    background: var(--dark-background-color);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+}
+#diagnosis-modal .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: var(--white-color);
+}

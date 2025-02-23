@@ -71,7 +71,23 @@
             <input type="file" id="image-input" accept="image/*" required style="display: none;">
         </form>
     </div>
-    <!-- New AI Efficiency Dashboard section -->
+    <!-- New Diagnosis Modal markup -->
+    <div id="diagnosis-modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 id="diagnosis"></h2>
+            <p id="probability"></p>
+        </div>
+    </div>
+    <!-- Added Login Selection Modal -->
+    <div id="login-selection-modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-button" id="login-modal-close">&times;</span>
+            <h3>Select Your Login</h3>
+            <button id="patient-btn">Patient Login</button>
+            <button id="hospital-btn">Hospital Login</button>
+        </div>
+    </div>
     <footer>
         <p>&copy; 2025 ExaminAI. All rights reserved.</p>
     </footer>
@@ -80,7 +96,7 @@
         // filepath: /Users/dinislima/Documents/AICaseStudy/public/index.html
         // Hide profile selection modal if a profile has already been chosen
         if (localStorage.getItem('user-profile')) {
-            document.getElementById('profile-selection-modal').style.display = 'none';
+            document.getElementById('login-selection-modal').style.display = 'none';
         }
 
         // Handle profile selection modal: store selection and redirect to appropriate login
@@ -99,13 +115,6 @@
         loginLink.addEventListener('click', function(event) {
             event.preventDefault();
             loginModal.style.display = 'flex';
-        });
-        
-        document.getElementById('utente-login').addEventListener('click', function() {
-            window.location.href = '/login?profile=utente';
-        });
-        document.getElementById('hospital-login-btn').addEventListener('click', function() {
-            window.location.href = '/hospital-login';
         });
     </script>
 </body>
