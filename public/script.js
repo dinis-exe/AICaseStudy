@@ -69,7 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(response => response.json())
             .then(data => {
                 document.getElementById('diagnosis').textContent = data.prediction;  // Update diagnosis
-                document.getElementById('probability').textContent = (data.confidence * 100).toFixed(2) + "%";  // Convert confidence to percentage
+                const confidence = data.confidence * 100;
+                const displayConfidence = confidence < 50 ? (100 - confidence) : confidence;
+                document.getElementById('probability').textContent = "Confidence: " + displayConfidence.toFixed(2) + "%";
                 document.getElementById('result').style.display = 'block';
             })
             .catch(error => {

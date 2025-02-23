@@ -1,34 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 /* Define CSS variables for the color palette */
 :root {
     --primary-color: #2c3e50; /* keep or update to a refined dark tone */
-    --secondary-color: #e74c3c; /* accent remains */
-    --background-color: #f7f9fc; /* lighter, cleaner background */
+    --secondary-color: #e74d3c; /* accent remains */
+    --background-color: #f7f9fc8f; /* lighter, cleaner background */
     --text-color: #000;
     --white-color: #fff;
-    --hover-primary-color: #3a506b;
-    --hover-secondary-color: #d9433c;
-    --dark-background-color: #121212;
+    --hover-primary-color: #000000;
+    --hover-secondary-color: #d9443c;
+    --dark-background-color: #121212;   
     --dark-text-color: #fff; /* Changed from #e0e0e0 to white */
-    --dark-container-color: #1e1e1e;
+    --dark-container-color: #1e1e1e57;
+    --light-container-color: #f7f9fc70;
     --ease-3: cubic-bezier(0.25, 0, 0.3, 1);
     --ease-out-5: cubic-bezier(0, 0, 0.3, 1);
     --ease-elastic-3: cubic-bezier(0.5, 1.25, 0.75, 1.25);
     --ease-elastic-4: cubic-bezier(0.5, 1.5, 0.75, 1.25);
 }
 
+body {
+    background: #EDEBED url('resources/background_dark.png');
+}
+
 /* Dark mode styles */
 body.dark-mode {
     background-color: var(--dark-background-color);
     color: var(--dark-text-color);
-    background-image: url('/images/background-dark.jpg');
+    background-image: url('/resources/background_dark.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 body:not(.dark-mode) {
     background-color: var(--background-color);
-    color: var(--text-color);
-    background-image: url('/images/background.jpg');
+    color: var(--dark-text-color);
+    background-image: url('/resources/background_light.png');
+    background: #EDEBED url('/resources/background_light.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 body.dark-mode .container,
@@ -40,7 +52,7 @@ body.dark-mode #dashboard {
 body:not(.dark-mode) .container,
 body:not(.dark-mode) .auth-container,
 body:not(.dark-mode) #dashboard {
-    background-color: var(--white-color);
+    background-color: var(--light-container-color);
     color: var(--text-color);
 }
 
@@ -49,7 +61,7 @@ body.dark-mode #dashboard {
 }
 
 body:not(.dark-mode) #dashboard {
-    background: linear-gradient(135deg, var(--white-color), var(--background-color));
+    background: linear-gradient(135deg, var(--light-container-color), var(--background-color));
 }
 
 body.dark-mode nav,
@@ -61,7 +73,7 @@ body.dark-mode footer {
 body:not(.dark-mode) nav,
 body:not(.dark-mode) footer {
     background-color: transparent; /* was var(--primary-color) */
-    color: var(--white-color);
+    color: var(--dark-text-color);
 }
 
 /* Rest of the dark mode styles remain the same */
@@ -70,18 +82,22 @@ body.dark-mode nav ul li a {
 }
 
 body.dark-mode .custom-file-upload {
-    background-color: var(--primary-color);
+    background-color: transparent;
     color: var(--white-color);
+    border: 2px solid var(--white-color) ;
 }
 
 body.dark-mode .btn {
-    background-color: var(--secondary-color);
+    background-color: transparent;
     color: var(--white-color);
+    border: 2px solid var(--white-color);
 }
 
 body.dark-mode .custom-file-upload:hover,
 body.dark-mode .btn:hover {
-    background-color: var(--hover-secondary-color);
+    background-color: var(--white-color);
+    color: var(--text-color);
+    border: 2px solid var(--white-color);
 }
 
 body.dark-mode h1,
@@ -115,9 +131,8 @@ body.dark-mode .form-group input {
 
 /* Apply the CSS variables */
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: "Raleway", serif;
     background-color: var(--background-color);
-    color: var(--text-color);
     margin: 0;
     padding: 0;
     display: flex;
@@ -125,7 +140,7 @@ body {
     align-items: center;
     height: 100vh;
     padding-top: 60px; /* Adjust based on the height of the navbar */
-    background-image: url('/images/background.jpg');
+    background-image: url('/resources/background_light.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -137,11 +152,44 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* Minimal inline styling for the profile selection modal */
+#login-selection-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.849);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    display:none;
+    
+}
+#login-selection-modal .modal-content {
+    background: var(--dark-background-color);
+    padding: 2rem;
+    border-radius: 8px;
+    text-align: center;
+}
+#login-selection-modal button {
+    padding: 0.75rem 1.5rem;
+    background-color: transparent;
+    color: var(--white-color);
+    border: 2px solid var(--white-color);
+    border-radius: 20px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: transform 0.2s;
+}
+
 nav {
     background-color: transparent;
     color: var(--white-color);
     padding: 1rem 2rem;
-    border-bottom: 1px solid rgba(255,255,255,0.2);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -200,8 +248,8 @@ nav ul li a:focus {
     max-width: 600px;
     margin: 2rem auto;
     padding: 2rem;
-    background-color: var(--white-color);
-    border-radius: 12px;
+    background-color: var(--dark-container-color);
+    border-radius: 30px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -213,7 +261,6 @@ nav ul li a:focus {
 }
 
 h1 {
-    color: var(--primary-color);
     text-align: center;
     margin-bottom: 20px;
     font-weight: 600;
@@ -228,24 +275,25 @@ form {
     margin-bottom: 20px;
 }
 
+
 .custom-file-upload {
     display: inline-block;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     cursor: pointer;
-    background-color: var(--primary-color);
-    color: var(--white-color);
-    border-radius: 8px;
-    border: none;
+    background-color: transparent;
+    color: var(--text-color);
+    border-radius: 20px;
+    border: 2px solid var(--text-color);
     letter-spacing: 0.5px;
     font-size: 1rem;
     font-weight: 500;
-    padding: 0.75rem 1.5rem;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: transform 0.2s;
 }
-
+/* Remove hover background change */
 .custom-file-upload:hover {
-    background-color: var(--hover-primary-color);
     transform: translateY(-2px);
+    background-color: black;
+    color: var(--dark-text-color);
 }
 
 #image-input {
@@ -253,22 +301,22 @@ form {
 }
 
 .btn {
-    padding: 0.5rem 1rem;
-    background-color: var(--secondary-color);
-    color: var(--white-color);
-    border: none;
-    border-radius: 8px;
+    padding: 0.75rem 1.5rem;
+    background-color: transparent;
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+    border-radius: 20px;
     cursor: pointer;
     letter-spacing: 0.5px;
     font-size: 1rem;
     font-weight: 500;
-    padding: 0.75rem 1.5rem;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: transform 0.2s;
 }
-
+/* Remove hover background change */
 .btn:hover {
-    background-color: var(--hover-secondary-color);
     transform: translateY(-2px);
+    background-color: black;
+    color: var(--dark-text-color);
 }
 
 #result {
@@ -288,20 +336,21 @@ form {
 #image-preview-container {
     margin-top: 1rem;
     text-align: center;
-    max-height: 300px;
-    overflow: auto; /* enables scroll if content overflows */
+    max-height: 500px;
+    /* remove scrollbar */
+    overflow: hidden;
 }
 
 /* Updated preview image styling */
 #image-preview {
     display: none;
-    max-width: 100%; /* enlarged based on screenshot design */
+    /* Rescale image without altering aspect ratio */
+    max-width: 500px;
+    max-height: 500px;
+    width: auto;
     height: auto;
     border-radius: 4px;
-    display: block;
     margin: 0 auto;
-    width: 100%;         /* added to scale image to container */
-    height: auto;
     object-fit: contain;
 }
 
@@ -405,13 +454,6 @@ footer {
     font-size: 1.4rem;
     font-weight: bold;
     color: var(--primary-color);
-}
-
-/* Override text colors for nav and footer with black letters */
-nav, 
-nav ul li a,
-footer {
-    color: #000 !important;
 }
 
 /* ...existing code remains unchanged... */
@@ -528,6 +570,51 @@ nav ul li .theme-toggle {
 
 .sun-and-moon .moon > circle {
     transition: transform 0.25s var(--ease-out-5);
+}
+
+/* ...existing code... */
+
+body:not(.dark-mode) nav {
+    border-bottom: none; /* Removing thin line under navbar in light mode */
+}
+
+body:not(.dark-mode) footer {
+    border-top: none; /* Removing thin line above footer in light mode */
+}
+
+/* ...existing code... */
+
+.auth-container {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 40px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.auth-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 /* ...existing code... */
