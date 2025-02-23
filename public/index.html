@@ -10,7 +10,7 @@
 </head>
 <body>
     <nav>
-        <div class="logo">ExaminAI</div>
+        <div class="logo"><strong>ExaminAI</strong></div>
         <ul>
             <li><a href="/"> Home</a></li>
             <li><a href="/about"> About</a></li>
@@ -41,47 +41,36 @@
             </li>
         </ul>
     </nav>
-    
-    <!-- Profile Selection Modal -->
-    <div id="profile-selection-modal">
-        <div class="modal-content">
-            <h2>Escolha o seu perfil</h2>
-            <p>Selecione "Utentes" ou "Hospitais" para prosseguir</p>
-            <button id="patient-btn">Utentes</button>
-            <button id="hospital-btn">Hospitais</button>
-        </div>
-    </div>
-    
-    <!-- New Login Selection Modal -->
-    <div id="login-selection-modal">
-        <div class="modal-content">
-            <h2>Escolha o tipo de login</h2>
-            <p>Selecione "Utente" ou "Hospital" para prosseguir</p>
-            <button id="utente-login" style="margin: 0.5rem; padding: 0.5rem 1rem;">Utente Login</button>
-            <button id="hospital-login-btn" style="margin: 0.5rem; padding: 0.5rem 1rem;">Hospital Login</button>
-        </div>
-    </div>
-    
+    <!-- Moved heading above the container -->
+    <header>
+        <h1 style="text-align: center; margin-top: 80px;"><strong>Revolutionizing Diagnostics with AI-Powered Accuracy.</strong></h1>
+    </header>
     <div class="container upload-container">
-        <h1>Medical Exam Analysis AI</h1>
         <form id="upload-form">
-            <label for="image-input" class="custom-file-upload">
-                <i class="fas fa-cloud-upload-alt"></i> Choose Image
-            </label>
-            <input type="file" id="image-input" accept="image/*" required>
-            <button type="submit" class="btn"><i class="fas fa-upload"></i> Upload Image</button>
+            <!-- Initial flex container for tagline and choose image action -->
+            <div id="initial-action" class="upload-top-row" style="display: flex; justify-content: center; align-items: center; gap: 1rem; height: 80px;">
+                <p class="tagline" style="margin: 0;">Get a swift and accurate pre-diagnosis of your medical scans with our cutting-edge AI model</p>
+                <div id="action-section">
+                    <label for="image-input" id="action-btn" class="custom-file-upload">
+                        <i class="fas fa-upload"></i><strong> Upload Your Scan</strong>
+                    </label>
+                </div>
+            </div>
+            <!-- Upload and preview container shown after file selection -->
+            <div id="upload-and-preview" style="display: none;">
+                <button type="submit" class="btn"><i class="fas fa-heartbeat"></i><strong> Analyze Scan</strong></button>
+                <div id="image-preview-container">
+                    <h2 id="image-preview-text" style="display: none;">Image Preview:</h2>
+                    <img id="image-preview" src="#" alt="Image Preview" style="display: none;"/>
+                </div>
+                <label for="image-input" id="change-image-btn" class="custom-file-upload" style="margin-top: 1rem;">
+                    <i class="fas fa-upload"></i> Change Image
+                </label>
+            </div>
+            <!-- Hidden file input moved outside of flex containers -->
+            <input type="file" id="image-input" accept="image/*" required style="display: none;">
         </form>
-        <div id="image-preview-container">
-            <h2 id="image-preview-text" style="display: none">Image Preview:</h2>
-            <img id="image-preview" src="#" alt="Image Preview" style="display: none";/>
-        </div>
-        <div id="result">
-            <h2>Diagnosis:</h2>
-            <p id="diagnosis"></p>
-            <h2>Probability:</h2>
-            <p id="probability"></p>
-        </div>
-    </div> <!-- End of container -->
+    </div>
     <!-- New AI Efficiency Dashboard section -->
     <footer>
         <p>&copy; 2025 ExaminAI. All rights reserved.</p>

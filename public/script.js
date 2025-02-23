@@ -86,7 +86,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const file = event.target.files[0];
         const preview = document.getElementById('image-preview');
         const previewText = document.getElementById('image-preview-text');
-        const resultContainer = document.getElementById('result');
+        const uploadPreviewContainer = document.getElementById('upload-and-preview');
+        const initialAction = document.getElementById('initial-action');
+        
         if (file) {
             const reader = new FileReader();
             reader.onload = function(e) {
@@ -95,11 +97,13 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             reader.readAsDataURL(file);
             previewText.style.display = 'block';
-            resultContainer.style.display = 'block';
+            initialAction.style.display = 'none'; // hide the initial choose image section
+            uploadPreviewContainer.style.display = 'block'; // show upload button and preview with change image option
         } else {
-            previewText.style.display = 'none';
-            resultContainer.style.display = 'none';
+            initialAction.style.display = 'flex';
+            uploadPreviewContainer.style.display = 'none';
             preview.style.display = 'none';
+            previewText.style.display = 'none';
         }
     });
 });
