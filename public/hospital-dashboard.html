@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,27 +8,50 @@
 </head>
 <body>
     <nav>
-        <!-- ...existing nav code... -->
         <div class="logo">ExaminAI</div>
         <ul>
-            <li><a href="/hospital-dashboard">Dashboard</a></li>
-            <li><a href="/manage-patients.html">Gerir Pacientes</a></li>
-            <li><a href="/record-exam.html">Registrar Exame</a></li>
-            <li><a href="/hospital-patients">Ver Lista de Pacientes</a></li>
-            <li><a href="/patient-history.html">Histórico de Exames</a></li>
-            <li><a href="/logout">Logout</a></li>
+            <li><a href="/"> Home</a></li>
+            <li><a href="/about"> About</a></li>
+            <li><a href="/contact"> Contact</a></li>
+            <li><a href="/profile" id="profile-link"> Profile</a></li>
+            <li><a href="/hospital-login" id="login-link"> Login</a></li>
+            <li><a href="/logout" id="logout-link" style="display: none;"> Logout</a></li>
+            <li>
+                <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+                    <!-- SVG icon code here -->
+                </button>
+            </li>
         </ul>
     </nav>
-    <div class="container">
-        <h1>Painel do Hospital</h1>
-        <p>Selecione uma funcionalidade:</p>
-        <ul>
-            <li><a href="/manage-patients.html">Gerir Registros de Pacientes</a></li>
-            <li><a href="/record-exam.html">Registrar Exame de Raio-X</a></li>
-            <li><a href="/patient-history.html">Acessar Histórico de Exames de um Paciente</a></li>
-            <li><a href="/hospital-patients">Visualizar Lista de Pacientes do Hospital</a></li>
+    <div class="auth-container" id="hospital-dashboard-container" style="max-width: 900px; margin: 100px auto; padding: 2rem;">
+        <h1>Hospital Dashboard</h1>
+        <p>Bem-vindo, trabalhador do hospital!</p>
+        <ul class="dashboard-menu" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
+            <li>
+                <a class="btn" href="/manage-patients.html">
+                    Gerir Pacientes
+                </a>
+            </li>
+            <li>
+                <a class="btn" href="/record-exam.html">
+                    Registrar Exame
+                </a>
+            </li>
+            <li>
+                <a class="btn" href="/hospital-patients">
+                    Visualizar Lista de Pacientes
+                </a>
+            </li>
+            <li>
+                <a class="btn" href="/patient-history.html">
+                    Histórico de Exames
+                </a>
+            </li>
         </ul>
     </div>
+    <footer>
+        <p>&copy; 2025 ExaminAI. All rights reserved.</p>
+    </footer>
     <script src="script.js"></script>
 </body>
 </html>
