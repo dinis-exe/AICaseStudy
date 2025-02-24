@@ -1,3 +1,47 @@
+-- Create Hospitals table
+CREATE TABLE IF NOT EXISTS Hospitals (
+    hospital_id INTEGER PRIMARY KEY,
+    hospital_name TEXT NOT NULL,
+    location TEXT NOT NULL
+);
+
+-- Create Workers table
+CREATE TABLE IF NOT EXISTS Workers (
+    worker_id INTEGER PRIMARY KEY,
+    worker_name TEXT NOT NULL,
+    gender TEXT NOT NULL,
+    dob DATE NOT NULL
+);
+
+-- Create Hospital_Worker table
+CREATE TABLE IF NOT EXISTS Hospital_Worker (
+    worker_id INTEGER,
+    hospital_id INTEGER,
+    password TEXT NOT NULL,
+    PRIMARY KEY (worker_id, hospital_id),
+    FOREIGN KEY (worker_id) REFERENCES Workers(worker_id),
+    FOREIGN KEY (hospital_id) REFERENCES Hospitals(hospital_id)
+);
+
+-- Create Patients table
+CREATE TABLE IF NOT EXISTS Patients (
+    patient_id INTEGER PRIMARY KEY,
+    password TEXT NOT NULL,
+    patient_name TEXT NOT NULL,
+    dob DATE NOT NULL,
+    gender TEXT NOT NULL
+);
+
+-- Create Patient_history table
+CREATE TABLE IF NOT EXISTS Patient_history (
+    history_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    patient_id INTEGER,
+    result TEXT NOT NULL,
+    date DATE NOT NULL,
+    hospital_id INTEGER,
+    FOREIGN KEY (patient_id) REFERENCES Patients(patient_id),
+    FOREIGN KEY (hospital_id) REFERENCES Hospitals(hospital_id)
+);
 
 -- Insertion of Portuguese Hospitals
 INSERT INTO Hospitals (hospital_id, hospital_name, location) VALUES

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pacientes - ExaminAI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">ExaminAI</div>
+        <ul>
+            <li><a href="/hospital-dashboard">Dashboard</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Lista de Pacientes</h1>
+        <div id="patients-list" style="margin-top: 2rem;"></div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('/hospital-patients')
+                .then(response => response.json())
+                .then(data => {
+                    let html = '<h2>Pacientes:</h2>';
+                    if (data.patients.length === 0) {
+                        html += '<p>Nenhum paciente encontrado.</p>';
+                    } else {
+                        html += '<ul>';
+                        data.patients.forEach(patient => {
+                            html += `<li>ID: ${patient.patient_id}, Nome: ${patient.patient_name}, Género: ${patient.gender}, Data de Nascimento: ${patient.dob}</li>`;
+                        });
+                        html += '</ul>';
+                    }
+                    document.getElementById('patients-list').innerHTML = html;
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('patients-list').innerHTML = '<p>Erro ao carregar a lista de pacientes.</p>';
+                });
+        });
+    </script>
+</body>
+</html>

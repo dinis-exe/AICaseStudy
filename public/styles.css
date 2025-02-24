@@ -166,7 +166,6 @@ body {
     align-items: center;
     z-index: 2000;
     display:none;
-    
 }
 #login-selection-modal .modal-content {
     background: var(--dark-background-color);
@@ -220,13 +219,10 @@ nav {
     align-items: center; /* Vertically centers nav content */
 }
 
-nav .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
+/* ...existing code... */
 
 nav ul {
-    list-style: none;
+    list-style: none; /* Remove bullet points */
     display: flex;
     gap: 1rem;
     display: flex;
@@ -239,7 +235,7 @@ nav ul li {
 
 nav ul li a {
     color: var(--white-color); /* Use white color */
-    text-decoration: none;
+    text-decoration: none; /* Remove underline */
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.5px;
@@ -296,8 +292,8 @@ form {
     align-items: center;
     gap: 1rem;
     margin-bottom: 20px;
+    width: 100%;
 }
-
 
 .custom-file-upload {
     display: inline-block;
@@ -334,12 +330,14 @@ form {
     font-size: 1rem;
     font-weight: 500;
     transition: transform 0.2s;
+    margin: 10px auto;
+    display: inline-block;
 }
 /* Remove hover background change */
 .btn:hover {
     transform: translateY(-2px);
     background-color: black;
-    color: var(--dark-text-color);
+    color: var(--white-color); /* Changed to white on hover */
 }
 
 #result {
@@ -397,6 +395,11 @@ footer {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .auth-container h1 {
@@ -406,6 +409,7 @@ footer {
 
 .form-group {
     margin-bottom: 1rem;
+    width: 100%;
 }
 
 .form-group label {
@@ -605,7 +609,6 @@ body:not(.dark-mode) footer {
     border-top: none; /* Removing thin line above footer in light mode */
 }
 
-/* ...existing code... */
 
 .auth-container {
   width: 100%;
@@ -667,3 +670,130 @@ body:not(.dark-mode) footer {
     cursor: pointer;
     color: var(--white-color);
 }
+
+/* Center container elements and adjust spacing */
+.auth-container,
+.container,
+#hospital-dashboard-container {
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+/* For grid layouts (e.g., manage patients page) */
+.auth-container.grid-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 100%;
+    width: 90%;
+    margin: 20px auto;
+    padding: 2rem;
+    text-align: center;  /* if you want form labels left aligned; otherwise, center */
+}
+
+/* Ensure buttons and form elements have proper spacing */
+form {
+    width: 100%;
+}
+.form-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+/* Center text in buttons */
+.btn {
+    margin: 6px auto;
+    display: inline-block;
+}
+
+/* Adjust dashboard menu alignment */
+.dashboard-menu {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-template-rows: repeat(2, 1fr); /* 2 rows */
+    gap: 0.5rem; /* Further reduced gap */
+    justify-content: center;
+    align-items: center;
+    list-style: none; /* Remove bullet points */
+    padding-left: 0%;
+}
+
+.dashboard-menu .btn {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: transform 0.2s, background-color 0.3s;
+    text-decoration: none; /* Remove underline */
+}
+
+.dashboard-menu .btn:hover {
+    transform: translateY(-2px);
+    background-color: var(--hover-primary-color);
+    color: var(--white-color); /* Changed to white on hover */
+}
+
+/* ...existing code... */
+
+#hospital-dashboard-container {
+    max-width: 900px;
+    margin: 100px auto;
+    padding: 2rem;
+    background-color: var(--light-container-color);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#hospital-dashboard-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+#hospital-dashboard-container h1 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+#hospital-dashboard-container p {
+    color: var(--text-color);
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.dashboard-menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.dashboard-menu .btn {
+    padding: 0.75rem 1.5rem;
+    background-color: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    letter-spacing: 0.5px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.dashboard-menu .btn:hover {
+    transform: translateY(-2px);
+    background-color: var(--hover-primary-color);
+    color: var(--white-color); /* Changed to white on hover */
+}
+
+/* ...existing code... */
