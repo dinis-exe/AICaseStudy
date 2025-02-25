@@ -10,7 +10,7 @@
 </head>
 <body>
     <nav>
-        <div class="logo"><strong>ExaminAI</strong></div>
+        <div class="logo"><a href="/"><strong>ExaminAI</strong></a></div>
         <ul>
             <li><a href="/"> Home</a></li>
             <li><a href="/about"> About</a></li>
@@ -71,6 +71,10 @@
             <input type="file" id="image-input" accept="image/*" required style="display: none;">
         </form>
     </div>
+    <!-- Loading overlay -->
+    <div id="loading-overlay">
+        <div id="loading-spinner"></div>
+    </div>
     <!-- New Diagnosis Modal markup -->
     <div id="diagnosis-modal">
         <div class="modal-content">
@@ -115,6 +119,30 @@
         loginLink.addEventListener('click', function(event) {
             event.preventDefault();
             loginModal.style.display = 'flex';
+        });
+
+        // Handle form submission with loading animation
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            document.getElementById('loading-overlay').style.display = 'flex';
+
+            const formData = new FormData(this);
+            fetch('/api/analyze', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loading-overlay').style.display = 'none';
+                document.getElementById('diagnosis').textContent = data.diagnosis;
+                document.getElementById('probability').textContent = `Probability: ${data.probability}`;
+                document.getElementById('diagnosis-modal').style.display = 'flex';
+            })
+            .catch(err => {
+                document.getElementById('loading-overlay').style.display = 'none';
+                alert('Erro ao analisar o exame.');
+                console.error(err);
+            });
         });
     </script>
 </body>

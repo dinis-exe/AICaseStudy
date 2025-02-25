@@ -53,6 +53,13 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
     });
 
+    // Apply the current theme to all pages
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+
     document.getElementById('upload-form').addEventListener('submit', function(event) {
         event.preventDefault();
         const imageInput = document.getElementById('image-input');

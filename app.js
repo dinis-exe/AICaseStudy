@@ -122,8 +122,14 @@ app.get('/hospital-patients', (req, res) => {
     if (!req.session.worker) {
         return res.status(401).json({ error: 'Not authenticated as hospital worker' });
     }
-
-    db.all("SELECT * FROM Patients WHERE hospital_id = ?", [req.session.worker.hospital_id], (err, rows) => {
+    const hospitalId = req.session.worker.hospital_id;
+    // Query patients registered at this hospital
+    const query = `
+        SELECT p.patient_id, p.patient_name, p.gender, p.dob 
+        FROM Patients p 
+        WHERE p.hospital_id = ?
+    `;
+    db.all(query, [hospitalId], (err, rows) => {
         if (err) {
             console.error('Database error while retrieving patients:', err.message);
             return res.status(500).json({ error: 'Database error while retrieving patients' });

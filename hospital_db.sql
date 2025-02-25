@@ -33,6 +33,7 @@ CREATE TABLE Patients (
     patient_name VARCHAR(255) NOT NULL,
     dob DATE NOT NULL,
     gender VARCHAR(10) NOT NULL
+    hospital_id INT NOT NULL,
 );
 
 -- Criar tabela de Histórico de Pacientes
