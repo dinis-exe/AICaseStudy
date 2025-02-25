@@ -1,3 +1,52 @@
+<<<<<<< HEAD
+=======
+-- Create Hospitals table
+CREATE TABLE IF NOT EXISTS Hospitals (
+    hospital_id INTEGER PRIMARY KEY,
+    hospital_name TEXT NOT NULL,
+    location TEXT NOT NULL
+);
+
+-- Create Workers table
+CREATE TABLE IF NOT EXISTS Workers (
+    worker_id INTEGER PRIMARY KEY,
+    worker_name TEXT NOT NULL,
+    gender TEXT NOT NULL,
+    dob DATE NOT NULL
+);
+
+-- Create Hospital_Worker table
+CREATE TABLE IF NOT EXISTS Hospital_Worker (
+    worker_id INTEGER,
+    hospital_id INTEGER,
+    password TEXT NOT NULL,
+    PRIMARY KEY (worker_id, hospital_id),
+    FOREIGN KEY (worker_id) REFERENCES Workers(worker_id),
+    FOREIGN KEY (hospital_id) REFERENCES Hospitals(hospital_id)
+);
+
+-- Create Patients table
+CREATE TABLE IF NOT EXISTS Patients (
+    patient_id INTEGER PRIMARY KEY,
+    password TEXT NOT NULL,
+    patient_name TEXT NOT NULL,
+    dob DATE NOT NULL,
+    gender TEXT NOT NULL,
+    hospital_id INTEGER,
+    FOREIGN KEY (hospital_id) REFERENCES Hospitals(hospital_id)
+);
+
+-- Create Patient_history table
+CREATE TABLE IF NOT EXISTS Patient_history (
+    history_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    patient_id INTEGER,
+    result TEXT NOT NULL,
+    date DATE NOT NULL,
+    hospital_id INTEGER,
+    FOREIGN KEY (patient_id) REFERENCES Patients(patient_id),
+    FOREIGN KEY (hospital_id) REFERENCES Hospitals(hospital_id)
+);
+>>>>>>> 4683b88e4b8d22e659aca5fdd6a1fff48e63bff0
 
 -- Insertion of Portuguese Hospitals
 INSERT INTO Hospitals (hospital_id, hospital_name, location) VALUES
@@ -23,14 +72,14 @@ INSERT INTO Hospital_Worker (worker_id, hospital_id, password) VALUES
     (5, 1, 'mypassword');
 
 -- Insertion of Patients (with random data)
-INSERT INTO Patients (patient_id, password, patient_name, dob, gender) VALUES
-    (1, 'p1', 'Ana Gomes', '1990-06-10', 'F'),
-    (2, 'p2', 'Carlos Mendes', '1982-12-03', 'M'),
-    (3, 'p3', 'Rita Sousa', '2000-04-25', 'F'),
-    (4, 'p4', 'Miguel Oliveira', '1978-09-15', 'M'),
-    (5, 'p5', 'Sofia Martins', '1995-08-20', 'F'),
-    (6, 'p6', 'Ricardo Silva', '1988-11-11', 'M'),
-    (7, 'p7', 'Beatriz Dias', '1992-03-05', 'F');
+INSERT INTO Patients (patient_id, password, patient_name, dob, gender, hospital_id) VALUES
+    (1, 'p1', 'Ana Gomes', '1990-06-10', 'F', 1),
+    (2, 'p2', 'Carlos Mendes', '1982-12-03', 'M', 2),
+    (3, 'p3', 'Rita Sousa', '2000-04-25', 'F', 3),
+    (4, 'p4', 'Miguel Oliveira', '1978-09-15', 'M', 4),
+    (5, 'p5', 'Sofia Martins', '1995-08-20', 'F', 2),
+    (6, 'p6', 'Ricardo Silva', '1988-11-11', 'M', 1),
+    (7, 'p7', 'Beatriz Dias', '1992-03-05', 'F', 3);
 
 -- Insertion of Patient History records (linking each patient to a hospital)
 INSERT INTO Patient_history (patient_id, result, date, hospital_id) VALUES

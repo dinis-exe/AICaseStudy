@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Paciente - ExaminAI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="logo"><a href="/"><strong>ExaminAI</strong></a></div>
+        <ul>
+            <li><a href="/hospital-dashboard">Dashboard</a></li>
+            <li><a href="/logout" id="logout-link">Logout</a></li>
+            <li><a href="/login" id="login-link">Login</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Detalhes do Paciente</h1>
+        <p id="welcome-message">Bem-vindo!</p>
+        <p id="patient-name"></p>
+        <p id="patient-dob"></p>
+        <p id="patient-gender"></p>
+        <h3>Histórico de Exames</h3>
+        <ul id="patient-history"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check login status (this is a placeholder, replace with actual login check)
+            const isLoggedIn = true; // Replace with actual login status check
+
+            if (isLoggedIn) {
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('logout-link').style.display = 'block';
+
+                // Fetch user information (replace with actual user info fetch)
+                const userName = 'Dr. João Silva'; // Replace with actual user name
+                document.getElementById('welcome-message').textContent = `Bem-vindo, ${userName}!`;
+            } else {
+                document.getElementById('login-link').style.display = 'block';
+                document.getElementById('logout-link').style.display = 'none';
+            }
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const patientId = urlParams.get('patient_id');
+
+            fetch('/patient-details?patient_id=' + patientId)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('patient-name').textContent = `Nome: ${data.patient.patient_name}`;
+                    document.getElementById('patient-dob').textContent = `Data de Nascimento: ${data.patient.dob}`;
+                    document.getElementById('patient-gender').textContent = `Género: ${data.patient.gender}`;
+                    
+                    let historyHtml = '';
+                    if (data.history.length === 0) {
+                        historyHtml += '<li>Nenhum exame encontrado.</li>';
+                    } else {
+                        data.history.forEach(item => {
+                            historyHtml += `<li>ID: ${item.history_id}, Resultado: ${item.result}, Data: ${item.date}, Hospital: ${item.hospital_name}</li>`;
+                        });
+                    }
+                    document.getElementById('patient-history').innerHTML = historyHtml;
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Erro ao carregar detalhes do paciente.');
+                });
+        });
+    </script>
+</body>
+</html>

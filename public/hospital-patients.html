@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pacientes - ExaminAI</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="logo"><a href="/"><strong>ExaminAI</strong></a></div>
+        <ul>
+            <li><a href="/hospital-dashboard">Dashboard</a></li>
+            <li id="login-link"><a href="/login">Login</a></li>
+            <li id="logout-link"><a href="/logout">Logout</a></li>
+        </ul>
+    </nav>
+    <div class="container" style="max-height: 90vh; overflow-y: auto;">
+        <h1>Lista de Pacientes</h1>
+        <p id="welcome-message">Bem-vindo!</p>
+        <ul id="patients-list" class="patient-list" style="margin-top: 2rem;"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check login status (this is a placeholder, replace with actual login check)
+            const isLoggedIn = true; // Replace with actual login status check
+
+            if (isLoggedIn) {
+                document.getElementById('login-link').style.display = 'none';
+                document.getElementById('logout-link').style.display = 'block';
+
+                // Fetch user information (replace with actual user info fetch)
+                const userName = 'Dr. João Silva'; // Replace with actual user name
+                document.getElementById('welcome-message').textContent = `Bem-vindo, ${userName}!`;
+            } else {
+                document.getElementById('login-link').style.display = 'block';
+                document.getElementById('logout-link').style.display = 'none';
+            }
+
+            fetch('/hospital-patients')
+                .then(response => response.json())
+                .then(data => {
+                    let html = '';
+                    if (data.patients.length === 0) {
+                        html += '<p>Nenhum paciente encontrado.</p>';
+                    } else {
+                        data.patients.forEach(patient => {
+                            html += `<li data-id="${patient.patient_id}">${patient.patient_name}</li>`;
+                        });
+                    }
+                    document.getElementById('patients-list').innerHTML = html;
+
+                    document.querySelectorAll('.patient-list li').forEach(item => {
+                        item.addEventListener('click', function() {
+                            const patientId = this.getAttribute('data-id');
+                            window.location.href = `/patient-details.html?patient_id=${patientId}`;
+                        });
+                    });
+                })
+                .catch(err => {
+                    console.error(err);
+                    document.getElementById('patients-list').innerHTML = '<p>Erro ao carregar a lista de pacientes.</p>';
+                });
+        });
+    </script>
+</body>
+</html>
