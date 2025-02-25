@@ -122,16 +122,26 @@ app.get('/hospital-patients', (req, res) => {
     if (!req.session.worker) {
         return res.status(401).json({ error: 'Not authenticated as hospital worker' });
     }
-
-    db.all("SELECT * FROM Patients WHERE hospital_id = ?", [req.session.worker.hospital_id], (err, rows) => {
-        if (err) {
-            console.error('Database error while retrieving patients:', err.message);
-            return res.status(500).json({ error: 'Database error while retrieving patients' });
+    const hospitalId = req.session.worker.hospital_id;
+    // Get hospital name from Hospitals table
+    db.get("SELECT hospital_name FROM Hospitals WHERE hospital_id = ?", [hospitalId], (err, hospitalRow) => {
+        if (err || !hospitalRow) {
+            return res.status(500).json({ error: 'Unable to retrieve hospital information' });
         }
-        if (!rows || rows.length === 0) {
-            return res.status(404).json({ error: 'No patients found for this hospital' });
-        }
-        res.json({ patients: rows });
+        const hospitalName = hospitalRow.hospital_name;
+        // Query patients registered at this hospital via Patient_history
+        const query = `
+            SELECT p.patient_id, p.patient_name, p.gender, p.dob 
+            FROM Patients p 
+            JOIN Patient_history ph ON p.patient_id = ph.patient_id 
+            WHERE ph.hospital_name = ?
+        `;
+        db.all(query, [hospitalName], (err, rows) => {
+            if (err) {
+                return res.status(500).json({ error: 'Database error while retrieving patients' });
+            }
+            res.json({ patients: rows });
+        });
     });
 });
 

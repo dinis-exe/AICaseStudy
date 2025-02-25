@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Dashboard - ExaminAI</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
     <nav>
@@ -24,14 +23,30 @@
             </li>
         </ul>
     </nav>
-    <div class="auth-container" id="hospital-dashboard-container" style="max-width: 900px; margin: 0px auto; padding: 2rem;">
+    <div class="auth-container" id="hospital-dashboard-container" style="max-width: 900px; margin: 100px auto; padding: 2rem;">
         <h1>Hospital Dashboard</h1>
         <p>Bem-vindo, trabalhador do hospital!</p>
-        <ul class="dashboard-menu" style="display: flex; flex-direction: column; gap: 0.1rem; justify-content: center; align-items: center;">
-            <li><a class="btn" href="/manage-patients.html"><i class="fas fa-user-cog"></i> Gerir Pacientes</a></li>
-            <li><a class="btn" href="/record-exam.html"><i class="fas fa-notes-medical"></i> Registrar Exame</a></li>
-            <li><a class="btn" href="/hospital-patients.html"><i class="fas fa-users"></i> Visualizar Lista de Pacientes</a></li>
-            <li><a class="btn" href="/patient-history.html"><i class="fas fa-history"></i> Histórico de Exames</a></li>
+        <ul class="dashboard-menu" style="display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;">
+            <li>
+                <a class="btn" href="/manage-patients.html">
+                    Gerir Pacientes
+                </a>
+            </li>
+            <li>
+                <a class="btn" href="/record-exam.html">
+                    Registrar Exame
+                </a>
+            </li>
+            <li>
+                <a class="btn" href="/hospital-patients">
+                    Visualizar Lista de Pacientes
+                </a>
+            </li>
+            <li>
+                <a class="btn" href="/patient-history.html">
+                    Histórico de Exames
+                </a>
+            </li>
         </ul>
     </div>
     <footer>
