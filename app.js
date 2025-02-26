@@ -19,7 +19,7 @@ const config = {
   authRequired: false,
   auth0Logout: true,
   secret: 'a long, randomly-generated string stored in env',
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://aicasestudy.onrender.com/',
   clientID: 'nxkhkDsXKc4jC1nblZyxGPAU8hVznu6u',
   issuerBaseURL: 'https://dev-jk7qsbb65cwkywqu.eu.auth0.com'
 };
