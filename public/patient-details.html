@@ -20,7 +20,7 @@
         <h1>Detalhes do Paciente</h1>
         <div id="patient-details">
             <div class="patient-info">
-                <div class="loading" id="loading-spinner"></div>
+                <div class="loading" id="loading-spinner">Carregando...</div>
                 <div class="error-message" style="display: none;"></div>
                 <div class="patient-card">
                     <h2>Informações do Paciente</h2>
@@ -46,5 +46,39 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const patientId = urlParams.get('patient_id');
+
+            if (patientId) {
+                fetch(`/patient-details/${patientId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.error) {
+                            document.querySelector('.error-message').textContent = data.error;
+                            document.querySelector('.error-message').style.display = 'block';
+                        } else {
+                            const patient = data.patient;
+                            document.getElementById('patient-id').textContent = patient.patient_id;
+                            document.getElementById('patient-name').textContent = patient.patient_name;
+                            document.getElementById('patient-gender').textContent = patient.patient_gender; // Adjust if you have gender in DB
+                            document.getElementById('patient-dob').textContent = patient.patient_dob; // Adjust if you have DOB in DB
+                        }
+                        document.getElementById('loading-spinner').style.display = 'none'; // Hide loading spinner
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        document.querySelector('.error-message').textContent = 'Erro ao carregar os detalhes do paciente.';
+                        document.querySelector('.error-message').style.display = 'block';
+                        document.getElementById('loading-spinner').style.display = 'none'; // Hide loading spinner
+                    });
+            } else {
+                document.querySelector('.error-message').textContent = 'ID do paciente não fornecido.';
+                document.querySelector('.error-message').style.display = 'block';
+            }
+        });
+    </script>
 </body>
 </html>

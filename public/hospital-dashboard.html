@@ -12,10 +12,10 @@
         <div class="logo"><a href="/"><strong>ExaminAI</strong></a></div>
         <ul>
             <li><a href="/"> Home</a></li>
-            <li><a href="/about"> About</a></li>
-            <li><a href="/contact"> Contact</a></li>
-            <li><a href="/profile" id="profile-link"> Profile</a></li>
-            <li><a href="/hospital-login" id="login-link"> Login</a></li>
+            <li><a href="/about.html"> About</a></li>
+            <li><a href="/contact.html"> Contact</a></li>
+            <li><a href="/profile.html" id="profile-link"> Profile</a></li>
+            <li><a href="/hospital-login.html" id="login-link"> Login</a></li>
             <li><a href="/logout" id="logout-link" style="display: none;"> Logout</a></li>
             <li>
                 <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
@@ -40,7 +40,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Check login status (this is a placeholder, replace with actual login check)
-            const isLoggedIn = true; // Replace with actual login status check
+            const isLoggedIn = localStorage.getItem('user-profile') === 'hospital'; // Check for the specific profile
 
             if (isLoggedIn) {
                 document.getElementById('login-link').style.display = 'none';
@@ -50,8 +50,8 @@
                 const userName = 'Dr. João Silva'; // Replace with actual user name
                 document.getElementById('welcome-message').textContent = `Bem-vindo, ${userName}!`;
             } else {
-                document.getElementById('login-link').style.display = 'block';
-                document.getElementById('logout-link').style.display = 'none';
+                // Redirect to index page if not logged in
+                window.location.href = '/index.html'; // Change this to your actual index page path
             }
         });
     </script>

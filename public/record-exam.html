@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrar Exame - ExaminAI</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
   <nav>
@@ -16,31 +17,36 @@
   </nav>
   <div class="container">
     <h1>Registrar Exame de Raio-X</h1>
-    <form action="/record-exam" method="POST" enctype="multipart/form-data">
+    <form id="record-exam-form" action="/record-exam" method="POST" enctype="multipart/form-data">
       <div class="form-group">
         <label for="patient_id_exam">ID do Paciente</label>
         <input type="number" id="patient_id_exam" name="patient_id" required>
       </div>
       <div class="form-group">
-        <label for="result">Resultado do Exame</label>
+        <label for="exam_result">Resultado do Exame</label>
         <input type="text" id="exam_result" name="exam_result" required>
+      </div>
+      <div class="form-group">
+        <label for="client_email">Email</label>
+        <input type="email" id="client_email" name="client_email" required>
       </div>
       <div class="form-group">
         <label for="date">Data do Exame</label>
         <input type="date" id="date" name="date" required>
       </div>
-      <!-- New file upload input for exam -->
       <div class="form-group">
         <label for="exam-file">Upload do Exame (Raio-X)</label>
-        <input type="file" id="exam-file" name="exam_file" accept="image/*">
+        <input type="file" id="exam-file" name="exam_file" accept="image/*" required>
       </div>
-      <!-- Container for file preview -->
       <div id="exam-preview-container" style="display:none; text-align:center;">
         <h2>Pré-visualização do Exame</h2>
         <img id="exam-preview" src="#" alt="Exam Preview" style="max-width:400px; max-height:400px;"/>
       </div>
       <button type="submit" class="btn">Registrar Exame</button>
     </form>
+  </div>
+  <div id="loading-overlay" style="display: none;">
+      <div id="loading-spinner">Loading...</div>
   </div>
   <script src="script.js"></script>
   <script>
@@ -55,6 +61,16 @@
           preview.src = e.target.result;
           preview.style.display = 'block';
           previewContainer.style.display = 'block';
+          
+          // Show loading overlay
+          document.getElementById('loading-overlay').style.display = 'block';
+          
+          // Simulate AI prediction (replace this with your actual prediction logic)
+          setTimeout(() => {
+            const hasPneumonia = Math.random() < 0.5; // Simulated prediction
+            document.getElementById('exam_result').value = hasPneumonia ? "Pneumonia" : "Normal"; // Set result based on prediction
+            document.getElementById('loading-overlay').style.display = 'none'; // Hide loading overlay after prediction
+          }, 2000); // Simulate processing time
         };
         reader.readAsDataURL(file);
       } else {

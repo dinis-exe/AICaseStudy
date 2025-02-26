@@ -13,9 +13,9 @@
         <div class="logo"><a href="/"><strong>ExaminAI</strong></a></div>
         <ul>
             <li><a href="/"> Home</a></li>
-            <li><a href="/about"> About</a></li>
-            <li><a href="/contact"> Contact</a></li>
-            <li><a href="/profile" id="profile-link"> Profile</a></li>
+            <li><a href="/about.html"> About</a></li>
+            <li><a href="/contact.html"> Contact</a></li>
+            <li><a href="/profile.html" id="profile-link"> Profile</a></li>
             <li><a href="/#" id="login-link"> Login</a></li>
             <li><a href="/logout" id="logout-link" style="display: none;"> Logout</a></li>
             <li>
@@ -41,13 +41,11 @@
             </li>
         </ul>
     </nav>
-    <!-- Moved heading above the container -->
     <header>
         <h1 style="text-align: center; margin-top: 80px;"><strong>Revolutionizing Diagnostics with AI-Powered Accuracy.</strong></h1>
     </header>
     <div class="container upload-container">
         <form id="upload-form">
-            <!-- Initial flex container for tagline and choose image action -->
             <div id="initial-action" class="upload-top-row" style="display: flex; justify-content: center; align-items: center; gap: 1rem; height: 80px;">
                 <p class="tagline" style="margin: 0;">Get a swift and accurate pre-diagnosis of your medical scans with our cutting-edge AI model</p>
                 <div id="action-section">
@@ -56,7 +54,6 @@
                     </label>
                 </div>
             </div>
-            <!-- Upload and preview container shown after file selection -->
             <div id="upload-and-preview" style="display: none;">
                 <button type="submit" class="btn"><i class="fas fa-heartbeat"></i><strong> Analyze Scan</strong></button>
                 <div id="image-preview-container">
@@ -67,15 +64,12 @@
                     <i class="fas fa-upload"></i> Change Image
                 </label>
             </div>
-            <!-- Hidden file input moved outside of flex containers -->
             <input type="file" id="image-input" accept="image/*" required style="display: none;">
         </form>
     </div>
-    <!-- Loading overlay -->
     <div id="loading-overlay">
         <div id="loading-spinner"></div>
     </div>
-    <!-- New Diagnosis Modal markup -->
     <div id="diagnosis-modal">
         <div class="modal-content">
             <span class="close-button">&times;</span>
@@ -83,12 +77,10 @@
             <p id="probability"></p>
         </div>
     </div>
-    <!-- Added Login Selection Modal -->
     <div id="login-selection-modal" style="display: none;">
         <div class="modal-content">
             <span class="close-button" id="login-modal-close">&times;</span>
             <h3>Select Your Login</h3>
-            <button id="patient-btn">Patient Login</button>
             <button id="hospital-btn">Hospital Login</button>
         </div>
     </div>
@@ -97,20 +89,15 @@
     </footer>
     <script src="script.js"></script>
     <script>
-        // filepath: /Users/dinislima/Documents/AICaseStudy/public/index.html
         // Hide profile selection modal if a profile has already been chosen
         if (localStorage.getItem('user-profile')) {
             document.getElementById('login-selection-modal').style.display = 'none';
         }
 
         // Handle profile selection modal: store selection and redirect to appropriate login
-        document.getElementById('patient-btn').addEventListener('click', function() {
-            localStorage.setItem('user-profile', 'utente');
-            window.location.href = '/login?profile=utente';
-        });
         document.getElementById('hospital-btn').addEventListener('click', function() {
             localStorage.setItem('user-profile', 'hospital');
-            window.location.href = '/hospital-login';
+            window.location.href = '/hospital-login.html';
         });
         
         // New login selection modal: show when login link is clicked

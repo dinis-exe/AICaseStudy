@@ -32,8 +32,9 @@ CREATE TABLE Patients (
     password TEXT NOT NULL,   
     patient_name VARCHAR(255) NOT NULL,
     dob DATE NOT NULL,
-    gender VARCHAR(10) NOT NULL
+    gender VARCHAR(10) NOT NULL,
     hospital_id INT NOT NULL,
+    FOREIGN KEY (hospital_id) REFERENCES Hospitais(hospital_id) ON DELETE CASCADE
 );
 
 -- Criar tabela de Histórico de Pacientes
