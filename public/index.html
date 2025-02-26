@@ -120,30 +120,6 @@
             event.preventDefault();
             loginModal.style.display = 'flex';
         });
-
-        // Handle form submission with loading animation
-        document.getElementById('upload-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            document.getElementById('loading-overlay').style.display = 'flex';
-
-            const formData = new FormData(this);
-            fetch('https://ai-challenge-api.onrender.com/predict/', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('loading-overlay').style.display = 'none';
-                document.getElementById('diagnosis').textContent = data.diagnosis;
-                document.getElementById('probability').textContent = `Probability: ${data.probability}`;
-                document.getElementById('diagnosis-modal').style.display = 'flex';
-            })
-            .catch(err => {
-                document.getElementById('loading-overlay').style.display = 'none';
-                alert('Erro ao analisar o exame.');
-                console.error(err);
-            });
-        });
     </script>
 </body>
 </html>
