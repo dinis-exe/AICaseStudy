@@ -76,9 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 // Update diagnosis results in the modal
                 document.getElementById('diagnosis').textContent = data.prediction;
-                const confidence = data.confidence * 100;
-                const displayConfidence = confidence < 50 ? (100 - confidence) : confidence;
-                document.getElementById('probability').textContent = "Confidence: " + displayConfidence.toFixed(2) + "%";
+                document.getElementById('probability').textContent = "Confidence: " + data.confidence + "%";
                 // Show diagnosis modal
                 const diagnosisModal = document.getElementById('diagnosis-modal');
                 diagnosisModal.style.display = 'flex';
