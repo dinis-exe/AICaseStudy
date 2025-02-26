@@ -250,7 +250,7 @@ app.get('/patient-history', ensureHospitalWorker, (req, res) => {
 });
 
 // New endpoint to get details for a specific patient - modified to work with proper error handling
-app.get('/patient-details-info', (req, res) => {
+app.get('/patient-details', (req, res) => {
     // First check if request has patient_id
     const { patient_id } = req.query;
     if (!patient_id) {

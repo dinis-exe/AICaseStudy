@@ -120,49 +120,38 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Handle patient details page
-    if (window.location.pathname.includes('patient-details')) {
-        const loadingSpinner = document.getElementById('loading-spinner');
-        const errorMessage = document.querySelector('.error-message');
-        
-        // Get patient ID from URL parameters
+    // Fetch and display patient details if on patient-details.html
+    if (window.location.pathname === '/patient-details.html') {
         const urlParams = new URLSearchParams(window.location.search);
         const patientId = urlParams.get('patient_id');
-
-        if (!patientId) {
-            errorMessage.style.display = 'block';
-            errorMessage.textContent = 'ID do paciente não fornecido.';
-            loadingSpinner.style.display = 'none';
-            return;
+        console.log('Patient ID:', patientId);
+        if (patientId) {
+            fetch(`/patient-details?patient_id=${patientId}`, {
+                method: 'GET'
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        document.querySelector('.error-message').textContent = data.error;
+                        document.querySelector('.error-message').style.display = 'block';
+                    } else {
+                        document.getElementById('patient-id').textContent = data.patient.patient_id;
+                        document.getElementById('patient-name').textContent = data.patient.patient_name;
+                        document.getElementById('patient-gender').textContent = data.patient.gender;
+                        document.getElementById('patient-dob').textContent = data.patient.dob;
+                    }
+                    document.getElementById('loading-spinner').style.display = 'none';
+                })
+                .catch(error => {
+                    console.error('Error fetching patient details:', error);
+                    document.querySelector('.error-message').textContent = 'Error fetching patient details';
+                    document.querySelector('.error-message').style.display = 'block';
+                    document.getElementById('loading-spinner').style.display = 'none';
+                });
+        } else {
+            document.querySelector('.error-message').textContent = 'Patient ID is missing';
+            document.querySelector('.error-message').style.display = 'block';
+            document.getElementById('loading-spinner').style.display = 'none';
         }
-
-        // Fetch patient details from server
-        fetch(`/patient-details-info?patient_id=${patientId}`)
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(data => {
-                        throw new Error(data.error || 'Erro ao buscar dados do paciente');
-                    });
-                }
-                return response.json();
-            })
-            .then(data => {
-                const patient = data.patient;
-                
-                // Update the DOM with patient information
-                document.getElementById('patient-id').textContent = patient.patient_id;
-                document.getElementById('patient-name').textContent = patient.patient_name;
-                document.getElementById('patient-gender').textContent = patient.gender;
-                document.getElementById('patient-dob').textContent = patient.dob;
-                
-                // Hide loading spinner
-                loadingSpinner.style.display = 'none';
-            })
-            .catch(err => {
-                console.error('Error:', err);
-                errorMessage.style.display = 'block';
-                errorMessage.textContent = err.message || 'Erro ao carregar os detalhes do paciente.';
-                loadingSpinner.style.display = 'none';
-            });
     }
 });
