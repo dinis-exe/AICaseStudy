@@ -119,4 +119,50 @@ document.addEventListener('DOMContentLoaded', function() {
             previewText.style.display = 'none';
         }
     });
+
+    // Handle patient details page
+    if (window.location.pathname.includes('patient-details')) {
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const errorMessage = document.querySelector('.error-message');
+        
+        // Get patient ID from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const patientId = urlParams.get('patient_id');
+
+        if (!patientId) {
+            errorMessage.style.display = 'block';
+            errorMessage.textContent = 'ID do paciente não fornecido.';
+            loadingSpinner.style.display = 'none';
+            return;
+        }
+
+        // Fetch patient details from server
+        fetch(`/patient-details-info?patient_id=${patientId}`)
+            .then(response => {
+                if (!response.ok) {
+                    return response.json().then(data => {
+                        throw new Error(data.error || 'Erro ao buscar dados do paciente');
+                    });
+                }
+                return response.json();
+            })
+            .then(data => {
+                const patient = data.patient;
+                
+                // Update the DOM with patient information
+                document.getElementById('patient-id').textContent = patient.patient_id;
+                document.getElementById('patient-name').textContent = patient.patient_name;
+                document.getElementById('patient-gender').textContent = patient.gender;
+                document.getElementById('patient-dob').textContent = patient.dob;
+                
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+            })
+            .catch(err => {
+                console.error('Error:', err);
+                errorMessage.style.display = 'block';
+                errorMessage.textContent = err.message || 'Erro ao carregar os detalhes do paciente.';
+                loadingSpinner.style.display = 'none';
+            });
+    }
 });
